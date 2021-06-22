@@ -89,9 +89,9 @@ client.connect(err => {
         })
   })
 
-   app.post('/isEmployer', (req, res) => {
+   app.post('/getPremiumEmployer', (req, res) => {
     const email = req.body.email;
-    employerCollection.find({ email: email })
+    employerPremiumCollection.find({ email: email })
         .toArray((err, admin) => {
             res.send(admin.length > 0);
         })
