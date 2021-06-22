@@ -27,6 +27,7 @@ client.connect(err => {
   const adminCollection = client.db("jobsHunting").collection("admin");
   const employerPremiumCollection = client.db("jobsHunting").collection("premiumEployer");
   const employerStandardCollection = client.db("jobsHunting").collection("StandardEployer");
+  const employerBasicCollection = client.db("jobsHunting").collection("basicEployer");
 
   app.post('/addJob/', (req, res) => {
     const job = req.body;
@@ -73,14 +74,14 @@ client.connect(err => {
     })
   })
 
-  // app.post('/addEmployer/', (req, res) => {
-  //   const employer = req.body;
-  //   console.log(employer);
-  //   employerCollection.insertOne(employer)
-  //   .then(result => {
-  //       res.send(result.insertedCount > 0)
-  //   })
-  // })
+  app.post('/addBasicEmployer/', (req, res) => {
+    const employer = req.body;
+    console.log(employer);
+    employerBasicCollection.insertOne(employer)
+    .then(result => {
+        res.send(result.insertedCount > 0)
+    })
+  })
 
   app.post('/isAdmin', (req, res) => {
     const email = req.body.email;
@@ -101,6 +102,14 @@ client.connect(err => {
    app.post('/getStandardEmployer', (req, res) => {
     const email = req.body.email;
     employerStandardCollection.find({ email: email })
+        .toArray((err, admin) => {
+            res.send(admin.length > 0);
+        })
+  })
+
+   app.post('/getBasicEmployer', (req, res) => {
+    const email = req.body.email;
+    employerBasicCollection.find({ email: email })
         .toArray((err, admin) => {
             res.send(admin.length > 0);
         })
