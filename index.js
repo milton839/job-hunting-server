@@ -25,7 +25,7 @@ client.connect(err => {
   const jobCollection = client.db("jobsHunting").collection("allJobs");
   const candidateCollection = client.db("jobsHunting").collection("applyCandidate");
   const adminCollection = client.db("jobsHunting").collection("admin");
-  const employerCollection = client.db("jobsHunting").collection("employer");
+  const employerPremiumCollection = client.db("jobsHunting").collection("premiumEployer");
 
   app.post('/addJob/', (req, res) => {
     const job = req.body;
@@ -54,14 +54,32 @@ client.connect(err => {
     })
   })
 
-   app.post('/addEmployer/', (req, res) => {
+   app.post('/addEmployerPremium/', (req, res) => {
     const employer = req.body;
     console.log(employer);
-    employerCollection.insertOne(employer)
+    employerPremiumCollection.insertOne(employer)
     .then(result => {
         res.send(result.insertedCount > 0)
     })
   })
+
+  // app.post('/addEmployer/', (req, res) => {
+  //   const employer = req.body;
+  //   console.log(employer);
+  //   employerCollection.insertOne(employer)
+  //   .then(result => {
+  //       res.send(result.insertedCount > 0)
+  //   })
+  // })
+
+  // app.post('/addEmployer/', (req, res) => {
+  //   const employer = req.body;
+  //   console.log(employer);
+  //   employerCollection.insertOne(employer)
+  //   .then(result => {
+  //       res.send(result.insertedCount > 0)
+  //   })
+  // })
 
   app.post('/isAdmin', (req, res) => {
     const email = req.body.email;
