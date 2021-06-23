@@ -157,18 +157,21 @@ client.connect(err => {
         })
     })
 
-  console.log("Database connection");
-//   client.close();
-});
-
-app.delete('/jobDelete/:id',(req,res) => {
+    app.delete('/jobDelete/:id',(req,res) => {
     const id = ObjectID(req.params.id);
+    console.log(id)
     jobCollection.findOneAndDelete({_id:id})
     .then(result => {
         res.send(result.value);
         
     })
   })
+
+  console.log("Database connection");
+//   client.close();
+});
+
+
 
 
 app.listen(port, () => {
