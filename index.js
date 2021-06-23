@@ -100,8 +100,8 @@ client.connect(err => {
   })
 
    app.post('/getStandardEmployer', (req, res) => {
-    const pemail = req.body.pemail;
-    employerStandardCollection.find({ email: pemail })
+    const email = req.body.email;
+    employerStandardCollection.find({ email: email })
         .toArray((err, admin) => {
             res.send(admin.length > 0);
         })
