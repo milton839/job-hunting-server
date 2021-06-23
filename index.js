@@ -161,6 +161,15 @@ client.connect(err => {
 //   client.close();
 });
 
+app.delete('/jobDelete/:id',(req,res) => {
+    const id = ObjectID(req.params.id);
+    jobCollection.findOneAndDelete({_id:id})
+    .then(result => {
+        res.send(result.value);
+        
+    })
+  })
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
