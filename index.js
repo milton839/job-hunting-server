@@ -28,11 +28,30 @@ client.connect(err => {
   const employerPremiumCollection = client.db("jobsHunting").collection("premiumEployer");
   const employerStandardCollection = client.db("jobsHunting").collection("StandardEployer");
   const employerBasicCollection = client.db("jobsHunting").collection("basicEployer");
+  const usersCollection = client.db("jobsHunting").collection("users");
+  const paymentCollection = client.db("jobsHunting").collection("payment");
 
   app.post('/addJob/', (req, res) => {
     const job = req.body;
     console.log(job);
     jobCollection.insertOne(job)
+    .then(result => {
+        res.send(result.insertedCount > 0)
+    })
+  })
+
+   app.post('/addUser/', (req, res) => {
+    const job = req.body;
+    console.log(job);
+    usersCollection.insertOne(job)
+    .then(result => {
+        res.send(result.insertedCount > 0)
+    })
+  })
+
+   app.post('/payment/', (req, res) => {
+    const pay = req.body;
+    paymentCollection.insertOne(pay)
     .then(result => {
         res.send(result.insertedCount > 0)
     })
