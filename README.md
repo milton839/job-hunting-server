@@ -5,8 +5,9 @@
     1. Post method
     2. Get method
     3. Update method
-    4. dynamic route
-    5. search method
+    4. Delete method
+    5. dynamic route
+    6. search method
 
 ### My github repository link
 
